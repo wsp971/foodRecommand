@@ -1,0 +1,19 @@
+{
+  "pages": [
+    "pages/main/index",
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/test/index",
+    "pages/draw/index",
+    "pages/shop/index",
+    "pages/fav/dish",
+    "pages/location/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "cloud": true
+}

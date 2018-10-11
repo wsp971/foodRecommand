@@ -1,0 +1,117 @@
+
+<!-- <i-button type="primary" bind:click="handleClick">这是一个按钮</i-button> -->
+<i-card title="王小王" extra="呵呵哒" full="{{true}}" i-class="head-info" thumb="https://i.loli.net/2017/08/21/599a521472424.jpg">
+</i-card>
+
+<i-panel class="cell-panel-demo" >
+    <i-cell title="收藏店铺（30）" is-link url="/pages/dashboard/index">
+        <!-- <i-icon type="like_fill" slot="icon" /> -->
+        <i-icon type="collection_fill" slot="icon"/>
+        
+    </i-cell>
+</i-panel>
+<i-panel class="cell-panel-demo" >
+    <i-cell title="喜欢商品（74）" is-link url="/pages/dashboard/index">
+        <i-icon type="like_fill" slot="icon" />
+    </i-cell>
+</i-panel>
+
+
+  
+<view class="module_head">
+      <view class="module_head_content">
+        <text class="module_head_title">猜你喜欢</text>
+        <view class="module_head_desc">好吃好喝不容错过~</view>
+      </view>
+     
+    </view>
+
+
+
+   <view class="shop-list"> 
+    <view class="shop-item">
+        <image class="shop-item-avater" src='http://aoshiman.com.cn/uploads/1535987930790.jpg'>
+        </image>
+        <view class="shop-item-desc">
+           <view class='shop-item-title'>小王炒面</view>
+           <view class='shop-item-content'>炒面是流行于大江南北的中国传统小吃，制作原料主要有面条、鸡蛋、肉丝、小油菜、葱段等，口味鲜美，营养丰富。</view>
+           <view class='shop-item-others'>
+              <text class='shop-item-price'>￥8.00</text>
+                <view class='shop-item-favdesc fav'>
+                   <i-icon type="like_fill" size="20" color='red'/>2000
+                </view>
+           </view>
+           <view>
+              <i-tag   class="i-tags shop-item-tags"    color="green">
+                  热卖
+              </i-tag>
+              <i-tag   class="i-tags shop-item-tags"     color="yellow">
+                  满减
+              </i-tag>
+              <i-tag   class="i-tags shop-item-tags"     color="red">
+                  新客立减
+              </i-tag>
+           </view>
+        </view>
+    </view>
+    <view class="shop-item">
+        <image class="shop-item-avater" src='http://aoshiman.com.cn/uploads/1535987687352.jpg'>
+        </image>
+        <view class="shop-item-desc">
+           <view class='shop-item-title'>精品兰州牛肉面</view>
+           <view class='shop-item-content'>兰州牛肉面，具有牛肉烂软，萝卜白净，辣油红艳，香菜翠绿，面条柔韧、滑利爽口、汤汁、诸味和谐，香味扑鼻，诱人食欲等特点。</view>
+           <view class='shop-item-others'>
+              <text class='shop-item-price'>￥15.00</text>
+                <view class='shop-item-favdesc fav'>
+                   <i-icon type="like_fill" size="20" color='red'/>2382
+                </view>
+           </view>
+           <view>
+              <i-tag   class="i-tags shop-item-tags"    color="red">
+                  有特色
+              </i-tag>
+              <i-tag   class="i-tags shop-item-tags"     color="green">
+                  新客立减
+              </i-tag>
+              
+           </view>
+        </view>
+    </view>
+    <view class="shop-item">
+        <image class="shop-item-avater" src='http://aoshiman.com.cn/uploads/1535988073204.jpg'>
+        </image>
+        <view class="shop-item-desc">
+           <view class='shop-item-title'>一碗香特性行面</view>
+           <view class='shop-item-content'>行面拉条子是甘肃武威凉州的特色小吃，是凉州人十分喜爱的小吃</view>
+           <view class='shop-item-others'>
+              <text class='shop-item-price'>￥20.00</text>
+                <view class='shop-item-favdesc fav'>
+                   <i-icon type="like_fill" size="20" color='red'/>5431
+                </view>
+           </view>
+           <view>
+              <i-tag   class="i-tags shop-item-tags"    color="yellow">
+                  招牌
+              </i-tag>
+              <i-tag   class="i-tags shop-item-tags"  color="#fa541c">
+                  狠优惠
+              </i-tag>
+              
+           </view>
+        </view>
+    </view>
+   
+  </view>
+
+
+
+
+
+
+
+
+
+<i-tab-bar current="{{ current }}" bindchange="handleChange" fixed="{{true}}">
+    <i-tab-bar-item key="homepage" icon="homepage" current-icon="homepage_fill" title="首页"></i-tab-bar-item>
+    <i-tab-bar-item key="mine" icon="mine" current-icon="mine_fill" title="我的"></i-tab-bar-item>
+</i-tab-bar>
