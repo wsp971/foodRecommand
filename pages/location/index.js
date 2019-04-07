@@ -1,16 +1,23 @@
 // pages/location/index.js
+const QQMapWX = require('../../lib/qqmap-wx-jssdk.min.js');
+const instance = new QQMapWX({
+  key:'DC5BZ-ULGKI-NV4GK-5FX4Y-CDQKS-TRB7W'
+});
+
+
 Page({
 
   /**
    * 页面的初始数据
    */
-
   data: {
 
   },
 
-
   authorise(){
+
+
+    
     wx.authorize({
       scope: 'scope.userLocation',
       success: function(){
@@ -18,6 +25,7 @@ Page({
           success: function(res) {
             console.log(res);
             const { latitude, longitude} = res;
+            debugger;
             wx.openLocation({
               latitude,
               longitude,
@@ -45,7 +53,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.authorise();
   },
 
   /**

@@ -7,7 +7,8 @@
     "pages/draw/index",
     "pages/shop/index",
     "pages/fav/dish",
-    "pages/location/index"
+    "pages/location/index",
+    "pages/functionTest/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

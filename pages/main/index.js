@@ -1,15 +1,18 @@
 // pages/main/index.js
-
 import * as db from '../../common/cloudDatabase.js';
-
 const firstCollection = db.getCollection('firstCollection');
-
+const QQMapWX = require('../../lib/qqmap-wx-jssdk.min.js');
+import request from '../../utils/request.js';
+const instance = new QQMapWX({
+  key: 'DC5BZ-ULGKI-NV4GK-5FX4Y-CDQKS-TRB7W'
+});
 
 Page({
 
   /**
    * 页面的初始数据
    */
+
   data: {
     current: 'homepage',
     x: 30,
@@ -20,9 +23,10 @@ Page({
     },
     recommendFoodList:[{
       name:'精品兰州牛肉面',
-      pic:'http://aoshiman.com.cn/uploads/1535987687352.jpg',
+      pic:'http://wq.360buyimg.com/data/ppms/picture/WechatIMG105.jpeg',
       description:'兰州牛肉面，具有牛肉烂软，萝卜白净，辣油红艳，香菜翠绿，面条柔韧、滑利爽口、汤汁、诸味和谐，香味扑鼻，诱人食欲等特点。',
        price:'15.00',
+       distance: '1km',
        favourite:233,
        tags:[{
           name:'有特色',
@@ -31,17 +35,43 @@ Page({
          name:'新客立减',
          color:'green'
        }]
-    }],
+    }, {
+        name: '炒粉',
+        pic: 'http://wq.360buyimg.com/data/ppms/picture/WechatIMG103.jpeg',
+        description: '香气逼人的炒粉，人气爆品',
+        price: '10.00',
+        favourite: 1003,
+        distance: '500m',
+        tags: [{
+          name: '爆款',
+          color: 'red'
+        }, {
+          name: '热门',
+          color: 'red'
+        }]
+      }],
     noAuth: false,
   },
 
-  handleChange({ detail }) {
+  handleChange({detail}) {
     this.setData({
       current: detail.key
     });
     wx.redirectTo({
       url: this.data.tabConfig[detail.key],
     })
+  },
+
+  getDishes(){
+    request({
+      url:"/shop/shopList?pageIndex=0&pageSize=5"
+    }).then(res=>{
+      console.log(res);
+    });
+  },
+
+  getShops(){
+     
   },
 
   getLocationAuth(){
@@ -59,8 +89,7 @@ Page({
                   },
                   fail: function (err) {
                      reject();
-                  },
-
+                  }
                 })
               }
               console.log('setting', res);
@@ -101,10 +130,18 @@ Page({
     //   }
 
     // })
-
+    this.getDishes();
     this.getLocationAuth()
     .then(res=>{
         console.log('have location');
+        wx.getLocation({
+          success: function (res) {
+            console.log(res);
+            const { latitude, longitude } = res;
+
+
+          }
+        });
         this.setData({
           noAuth: false
         })

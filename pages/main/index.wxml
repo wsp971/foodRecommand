@@ -24,8 +24,10 @@
 
 
 <view class='main-container'>
+  <!-- <view class="location"><text>当前位置：广东省深圳市</text></view> -->
   <!-- <image class='main-pic' src='https://i.loli.net/2017/08/21/599a521472424.jpg'></image> -->
-  <image class='main-pic' src='http://aoshiman.com.cn/uploads/1535987687352.jpg'></image>
+  <view>
+  <image class='main-pic' src='http://wq.360buyimg.com/data/ppms/picture/WechatIMG105.jpeg'></image>
   <view class='text-wrap'>
     <view class='main-title'>精品兰州牛肉面</view>
     <view class='main-desc'>兰州牛肉面，具有牛肉烂软，萝卜白净，辣油红艳，香菜翠绿，面条柔韧、滑利爽口、汤汁、诸味和谐，香味扑鼻，诱人食欲等特点。面条的种类较多，有大宽、二宽、韭叶、一窝丝、“荞麦棱等，还有“二细”、“三细”、“细”、“毛细”等，食客可随爱好自行选择。当地人们描述它是一清、二白、三绿、四红、五黄，即：牛肉汤清如白水，几片白萝卜纯白，汤上漂着鲜绿的蒜苗，辣椒油红，面条光亮透黄。因此，兰州牛肉面的声誉一直延续。</view>
@@ -40,7 +42,10 @@
     <i-tag   class="i-tags main-item-tags"     color="blue">
         1000+喜欢
     </i-tag>
+    <text class="distance">距离4.1km</text>
   </view>
+  </view>
+  
 </view>
 
 <view class="module_head">
@@ -73,7 +78,8 @@
            <view>
             <i-tag   class="i-tags shop-item-tags"   wx:for="{{item.tags}}"  wx:for-item="tag" color="{{tag.color}}">
                 {{tag.name}}
-            </i-tag>  
+            </i-tag>
+            <text class="distance">距离{{item.distance}}</text>  
            </view>
         </view>
     </view>

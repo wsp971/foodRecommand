@@ -8,10 +8,12 @@
 		"es6": true,
 		"postcss": true,
 		"minified": true,
-		"newFeature": true
+		"newFeature": true,
+		"nodeModules": true
 	},
+	"cloudfunctionRoot": "functions/",
 	"compileType": "miniprogram",
-	"libVersion": "2.3.0",
+	"libVersion": "2.6.2",
 	"appid": "wx96f6c5f5dcbac389",
 	"projectname": "%E7%BE%8E%E9%A3%9F%E6%8E%A8%E8%8D%90",
 	"isGameTourist": false,
@@ -33,7 +35,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 5,
+			"current": 6,
 			"list": [
 				{
 					"id": -1,
@@ -68,7 +70,14 @@
 				{
 					"id": -1,
 					"name": "获取地理位置",
-					"pathName": "pages/location/index"
+					"pathName": "pages/location/index",
+					"query": ""
+				},
+				{
+					"id": 6,
+					"name": "云函数测试",
+					"pathName": "pages/functionTest/index",
+					"query": ""
 				}
 			]
 		}
