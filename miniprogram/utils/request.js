@@ -1,10 +1,12 @@
+import Cookie from './cookies.js';
 const config = {
   mode: 'development'
 };
-const cookie = require('./cookies.js');
+
 export default function request (option){
   const baseUrl = config.mode == 'development' ? 'http://localhost:9999':'https://aoshiman.com.cn';
-  const openid = cookie.getItem('openid');
+  const openid = Cookie.getItem('openid');
+  console.log('request add openid', openid);
   return new Promise((resolve, reject)=>{
     wx.request({
       url: baseUrl + option.url,

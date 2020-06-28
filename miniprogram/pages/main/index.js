@@ -1,11 +1,18 @@
 // pages/main/index.js
-import * as db from '../../common/cloudDatabase.js';
-const firstCollection = db.getCollection('firstCollection');
 const QQMapWX = require('../../lib/qqmap-wx-jssdk.min.js');
 import request from '../../utils/request.js';
-const instance = new QQMapWX({
+
+const qqmapSDK = new QQMapWX({
   key: 'DC5BZ-ULGKI-NV4GK-5FX4Y-CDQKS-TRB7W'
 });
+
+
+const app = getApp();
+
+console.log('globallocation',app.globalData.location,app.isDebug);
+
+
+// console.log('instance',instance);
 
 Page({
 
@@ -14,13 +21,7 @@ Page({
    */
 
   data: {
-    current: 'homepage',
-    x: 30,
-    y:30,
-    tabConfig:{
-      'homepage':'/pages/main/index',
-      'mine':'/pages/test/index'
-    },
+  
     recommendFoodList:[{
       name:'精品兰州牛肉面',
       pic:'http://wq.360buyimg.com/data/ppms/picture/WechatIMG105.jpeg',
@@ -50,7 +51,12 @@ Page({
           color: 'red'
         }]
       }],
+
+    // 检查有没有获取到位置授权
     noAuth: false,
+    
+    //推荐的商家
+    recommendShop:[]
   },
 
   handleChange({detail}) {
@@ -62,20 +68,20 @@ Page({
     })
   },
 
-  getDishes(){
+  // 获取推荐得精品店铺
+  getRecommendShopList(){
     request({
       url:"/shop/shopList?pageIndex=0&pageSize=5"
     }).then(res=>{
+      this.setData({
+        recommendShop: res.data.data
+      })
       console.log(res);
     });
   },
 
-  getShops(){
-     
-  },
-
-  getLocationAuth(){
-      let self = this;
+  // 检查位置授权权限
+  checkLocationAuth(){
       return new Promise((resolve, reject)=>{
           wx.getSetting({
             success: function (res) {
@@ -96,65 +102,119 @@ Page({
             },
             fail: function (err) {
               console.log('setting err', err);
-
+              reject();
             } 
           })
       });
   },
 
-  callback: function({detail}){
-    if(detail.authSetting['scope.userLocation']){
-      this.setData({
-          noAuth: false
-      })
-    }else{
-      this.setData({
-          noAuth: true
-      })
+
+  computeDistance(){
+    console.log('current location',app.globalData.location);
+    if(!app.globalData.location){
+      return Promise.reject();
     }
+    const destLocation = this.data.recommendShop.map(shop=>{
+      return {
+        latitude: parseFloat(shop.latLng.lat),
+        longitude: parseFloat(shop.latLng.lng)
+      }
+    })
+    return new Promise((resolve,reject)=>{
+      qqmapSDK.calculateDistance({
+        mode:'driving',
+        from: app.globalData.location,
+        to:destLocation,
+        success:(res)=>{
+          const newShopList = this.data.recommendShop.map((shop,index)=>{
+            return {
+              ...shop,
+              distance:res.result.elements[index].distance,
+              duration:res.result.elements[index].duration,
+            }
+          })
+          this.setData({
+            recommendShop:newShopList
+          })
+          resolve();
+        },
+        fail:(error)=>{
+          debugger;
+        }
+      })
+    })
+    
   },
 
+  // 获取当前所在城市
+  getCity(){
+    if(!app.globalData.location){
+      return Promise.reject();
+    }
+    return new Promise((resolve,reject)=>{
+      qqmapSDK.reverseGeocoder({
+        location:app.globalData.location,
+        success:  (res)=> {
+          let city = res.result.ad_info.city
+          app.globalData.city = city;
+          wx.setNavigationBarTitle({
+            title:city
+          })
+          resolve();
+        },
+        fail: function (res) {
+          console.log(res);
+          reject();
+        },
+      });
+    })
+  },
+
+  // 获取当前位置得地理坐标
+  getLocation(){
+    return new Promise((resolve,reject)=>{
+      wx.getLocation({
+        success:  (res)=> {
+          console.log(res);
+          const { latitude, longitude } = res;
+          console.log('坐标', latitude,longitude);
+          app.globalData.location = {
+            latitude,
+            longitude
+          };
+          this.setData({
+            noAuth: false
+          })
+          resolve();
+        },
+        fail: (err)=>{
+          console.log('err',err);
+          this.setData({
+            noAuth:true
+          })
+          reject();
+        }
+      });
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // 用户授权地理位置
-    // wx.getSetting({
-    //   success: function(res){
-    //     console.log('setting',res);
-    //   },
-    //   fail: function(err){
-    //     console.log('setting err', err);
+    // 获取推荐列表
+    this.getRecommendShopList();
 
-    //   }
-
-    // })
-    this.getDishes();
-    this.getLocationAuth()
-    .then(res=>{
-        console.log('have location');
-        wx.getLocation({
-          success: function (res) {
-            console.log(res);
-            const { latitude, longitude } = res;
+    //获取当前用户得地理坐标
+    this.checkLocationAuth()
+      .then(this.getLocation)
+      .then(this.computeDistance)
+      .then(this.getCity)
+      .catch(e=>{
+          console.log('location err',e);
+      })
 
 
-          }
-        });
-        this.setData({
-          noAuth: false
-        })
-    }).catch(e=>{
-        this.setData({
-          noAuth: true
-        })
-        console.log('not location auth');
-    });
-
-  
-
-    
 
     // wx.openSetting({
     //   success: function(){
@@ -170,15 +230,15 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    firstCollection.add({
-      data: {
-        name: "wsp",
-        age: 28
-      }}).then(res=>{
-        console.log(res);
-      }).catch(e=>{
-        console.error(e);
-      })
+    // firstCollection.add({
+    //   data: {
+    //     name: "wsp",
+    //     age: 28
+    //   }}).then(res=>{
+    //     console.log(res);
+    //   }).catch(e=>{
+    //     console.error(e);
+    //   })
   },
 
   /**

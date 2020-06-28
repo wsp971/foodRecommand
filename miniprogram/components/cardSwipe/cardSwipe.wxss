@@ -1,0 +1,30 @@
+.wrapper{
+    width: 100%;
+    height: 100%;
+    padding: 0 30rpx;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.cards{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20rpx;
+    box-sizing: border-box;
+    transform-style: preserve-3d;
+}
+
+.card-next{
+    animation: fadeIn 0.5s linear;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}

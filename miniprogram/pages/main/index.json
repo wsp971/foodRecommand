@@ -9,7 +9,9 @@
     "i-cell": "../../dist/cell/index",
     "i-card": "../../dist/card/index",
     "i-icon": "../../dist/icon/index",
-    "i-tag": "../../dist/tag/index"
+    "i-tag": "../../dist/tag/index",
+    "recommend-food":"/components/recommendFood/index",
+    "footer":"/components/footer/footer"
   },
-  "navigationBarTitleText": "我的"
+  "navigationBarTitleText": "武威市"
 }

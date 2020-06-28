@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "card-swipe": "/components/cardSwipe/cardSwipe",
+    "card": "/components/card/card"
+  }
+}

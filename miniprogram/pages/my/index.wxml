@@ -1,7 +1,11 @@
 
 <!-- <i-button type="primary" bind:click="handleClick">这是一个按钮</i-button> -->
-<i-card title="王小王" extra="呵呵哒" full="{{true}}" i-class="head-info" thumb="https://i.loli.net/2017/08/21/599a521472424.jpg">
-</i-card>
+<!-- <i-card title="王小王" extra="呵呵哒" full="{{true}}" i-class="head-info" thumb="https://i.loli.net/2017/08/21/599a521472424.jpg">
+</i-card> -->
+
+
+<button open-type="getUserInfo" bindgetuserinfo="userinfo">获取用户信息</button>
+
 
 <i-panel class="cell-panel-demo" >
     <i-cell title="收藏店铺（30）" is-link url="/pages/dashboard/index">
@@ -19,12 +23,12 @@
 
   
 <view class="module_head">
-      <view class="module_head_content">
-        <text class="module_head_title">猜你喜欢</text>
-        <view class="module_head_desc">好吃好喝不容错过~</view>
-      </view>
-     
+    <view class="module_head_content">
+      <text class="module_head_title">猜你喜欢</text>
+      <view class="module_head_desc">好吃好喝不容错过~</view>
     </view>
+    
+  </view>
 
 
 
@@ -100,18 +104,5 @@
            </view>
         </view>
     </view>
-   
   </view>
-
-
-
-
-
-
-
-
-
-<i-tab-bar current="{{ current }}" bindchange="handleChange" fixed="{{true}}">
-    <i-tab-bar-item key="homepage" icon="homepage" current-icon="homepage_fill" title="首页"></i-tab-bar-item>
-    <i-tab-bar-item key="mine" icon="mine" current-icon="mine_fill" title="我的"></i-tab-bar-item>
-</i-tab-bar>
+<footer current="mine"></footer>

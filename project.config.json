@@ -1,22 +1,33 @@
 {
-	"description": "项目配置文件。",
-	"packOptions": {
-		"ignore": []
-	},
+	"miniprogramRoot": "miniprogram/",
+	"cloudfunctionRoot": "cloudfunctions/",
 	"setting": {
 		"urlCheck": false,
 		"es6": true,
+		"enhance": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
-		"nodeModules": true
+		"coverView": true,
+		"nodeModules": true,
+		"autoAudits": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		},
+		"useCompilerModule": true,
+		"userConfirmedUseCompilerModuleSwitch": false
 	},
-	"cloudfunctionRoot": "functions/",
-	"compileType": "miniprogram",
-	"libVersion": "2.6.2",
 	"appid": "wx96f6c5f5dcbac389",
 	"projectname": "%E7%BE%8E%E9%A3%9F%E6%8E%A8%E8%8D%90",
-	"isGameTourist": false,
+	"libVersion": "2.11.3",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"cloudfunctionTemplateRoot": "cloudfunctionTemplate",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -31,7 +42,10 @@
 			"list": []
 		},
 		"game": {
-			"currentL": -1,
+			"list": []
+		},
+		"gamePlugin": {
+			"current": -1,
 			"list": []
 		},
 		"miniprogram": {
@@ -78,6 +92,13 @@
 					"name": "云函数测试",
 					"pathName": "pages/functionTest/index",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "swiper",
+					"pathName": "pages/swiper/index",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

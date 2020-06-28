@@ -14,9 +14,7 @@ Page({
       'http://aoshiman.com.cn/uploads/1535989843269.png',
       'http://aoshiman.com.cn/uploads/1535989473216.jpg',
       'http://aoshiman.com.cn/uploads/1535988183032.jpg',
-      'http://aoshiman.com.cn/uploads/1535988073204.jpg',
       'http://aoshiman.com.cn/uploads/1535987930790.jpg',
-      'http://aoshiman.com.cn/uploads/1535987687352.jpg',
     ],//奖品图片数组
   },
 

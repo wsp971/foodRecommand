@@ -1,0 +1,39 @@
+<!-- index.wxml -->
+<view class="container">
+  <card-swipe wx:if="{{cards.length > 0}}" generic:card="card" class="card-swipe" bind:cardSwipe="cardSwipe" cards="{{cards}}" removed-cards="{{removed_cards}}" show-cards="{{show_cards}}" slide-thershold="{{thershold}}" transition="{{transition}}" scale-ratio="{{scale_ratio}}" circling="{{circling}}" up-height="{{up_height}}" rotate-deg="{{rotate_deg}}" slide-duration="{{slide_duration}}"></card-swipe>
+  <!-- <view class="settings" style="display: block;">
+    <view class="label btn-area">
+      <text data-symbol="add" bind:tap="cardOperate">添加卡片</text>
+      <text decode="{{true}}">&emsp;</text>
+      <text data-symbol="reset" bind:tap="cardOperate">重置卡片</text>
+    </view>
+    <view class="label btn-area">
+      <view style="white-space: nowrap;">删除卡片</view>
+      <view style="display: flex; flex: 1; overflow-x: scroll;">
+        <block wx:for="{{cards}}" wx:for-item="card" wx:key="index">
+          <view wx:if="{{card}}" class="rm-card {{index === (current_cursor || 0) ? 'disable' : ''}}" data-remove-index="{{index}}" data-symbol="remove" bind:tap="cardOperate">
+            {{index + 1}}
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+  <view class="settings">
+    <text class="label">列表循环：</text>
+    <switch class="setting" checked="{{circling}}" data-symbol="loop" bindchange="onSwitch" />
+    <text class="label">过渡动画：</text>
+    <switch class="setting" checked="{{transition}}" data-symbol="transition" bindchange="onSwitch" />
+  </view>
+  <view class="settings">
+    <text class="label">展示卡片：</text>
+    <slider class="setting" value="{{show_cards}}" data-symbol="show_cards" bindchange="onSlide" min="1" max="{{cards.length}}" show-value />
+  </view>
+  <view class="settings">
+    <text class="label">旋转角度：</text>
+    <slider class="setting" value="{{rotate_deg}}" data-symbol="rotate_deg" bindchange="onSlide" min="-180" max="180" show-value />
+  </view>
+  <view class="settings">
+    <text class="label">滑动时长：</text>
+    <slider class="setting" value="{{slide_duration}}" data-symbol="slide_duration" step="100" bindchange="onSlide" min="100" max="2000" show-value />
+  </view> -->
+</view>

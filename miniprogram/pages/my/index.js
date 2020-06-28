@@ -4,22 +4,7 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {
-    current: 'mine',
-    tabConfig: {
-      'homepage': '/pages/main/index',
-      'mine': '/pages/test/index'
-    }
-  },
-
-  handleChange({ detail }) {
-    this.setData({
-      current: detail.key
-    });
-    wx.redirectTo({
-      url: this.data.tabConfig[detail.key],
-    })
-  },
+ 
 
   /**
    * 生命周期函数--监听页面加载
@@ -28,6 +13,10 @@ Page({
     
   },
 
+  userinfo(userInfo){
+    console.log('userinfo',userInfo);
+
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

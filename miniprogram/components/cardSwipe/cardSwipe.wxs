@@ -1,0 +1,106 @@
+/*
+ * @Author: jesse zhao 
+ * @Date: 2020-04-07 02:41:53 
+ * @Last Modified by: jesse zhao
+ * @Last Modified time: 2020-04-20 01:38:33
+ * @github: https://github.com/1esse/cardSwipe
+ */
+var SLIDE_THRESHOLD = 0 // 松手后滑出界面阈值
+var CONTEXT_WIDTH = 0 // 组件宽度
+var instance = {} // 卡片实例
+var startX = 0 // 手指刚接触时屏幕X轴位置
+var moveX = 0 // 移动距离
+var cardIndex = 0 // 滑动卡片的层级索引
+var cardZindex = 0 // 滑动卡片的层级索引
+var currentCursor = 0 // 当前最上层卡片索引
+var lock = false
+var ROTATE_DEG = 0 // 移出屏幕过程旋转角度
+
+function touchstart(event, ownerinstance) {
+    if (lock) return
+    lock = true
+    instance = event.instance
+    var dataset = instance.getDataset()
+    cardIndex = dataset.cardIndex
+    currentCursor = dataset.currentCursor
+    if (cardIndex !== currentCursor) {
+        instance = {}
+        return
+    }
+    ROTATE_DEG = dataset.rotateDeg
+    SLIDE_DURATION = dataset.slideDuration
+    SLIDE_THRESHOLD = dataset.slideThershold
+    CONTEXT_WIDTH = dataset.contextWidth + Math.floor((Math.abs(ROTATE_DEG) % 360) * dataset.contextWidth / 180)
+    cardZindex = dataset.cardZindex
+    startX = event.touches[0].clientX
+}
+
+function touchmove(event, ownerinstance) {
+    if (!lock) return
+    if (!instance || !startX || cardIndex !== currentCursor) {
+        lock = false
+        return
+    }
+    var clientX = event.touches[0].clientX
+    moveX = clientX - startX
+    instance.setStyle({
+        "transition": "unset",
+        "transform": "translate3d(" + moveX + "px, 0, " + cardZindex + "px) rotate(" + ROTATE_DEG / CONTEXT_WIDTH * moveX + "deg)",
+    })
+}
+
+function touchend(event, ownerinstance) {
+    if (!lock) return
+    if (!instance || !moveX || cardIndex !== currentCursor) {
+        lock = false
+        return
+    }
+    instance.setStyle({
+        "transform": Math.abs(moveX) < SLIDE_THRESHOLD ?
+            // 如果小于滑出阈值，放弃setStyle，使用之前的transfrom
+            "translate3d()" :
+            "translate3d(" + (moveX > 0 ? CONTEXT_WIDTH : -CONTEXT_WIDTH) + "px, 0, " + cardZindex + "px) rotate(" + (moveX > 0 ? ROTATE_DEG : -ROTATE_DEG) + "deg)",
+        "transition": "all ease " + (SLIDE_DURATION / 1000).toString() + "s",
+    })
+    Math.abs(moveX) >= SLIDE_THRESHOLD && ownerinstance.callMethod('nextCard', {
+        direction: moveX > 0 ? 'right' : 'left'
+    })
+    lock = false
+    startX = 0
+    moveX = 0
+}
+
+function circleRange(index, current_cursor, showCards, total, removedCards, symbol) {
+    if (showCards > total || current_cursor === undefined) return
+    var range = []
+    var i = current_cursor
+    while (range.length < showCards) {
+        removedCards.indexOf(i) === -1 && range.push(i)
+        i += 1
+        if (i === total) i = 0
+    }
+    switch (symbol) {
+        case 'in':
+            return range.indexOf(index) >= 0
+        case 'loc':
+            return range.indexOf(index)
+    }
+}
+
+function getRangeRemoves(removedCards, current_cursor, showCards, total) {
+    var count = 0
+    var i = current_cursor
+    while (count < showCards && i < total) {
+        removedCards.indexOf(i) === -1 && count++
+        i++
+    }
+    return i
+}
+
+module.exports = {
+    touchstart: touchstart,
+    touchmove: touchmove,
+    touchend: touchend,
+    circleRange: circleRange,
+    getRangeRemoves: getRangeRemoves
+}

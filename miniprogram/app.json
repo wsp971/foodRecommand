@@ -3,12 +3,13 @@
     "pages/main/index",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/test/index",
+    "pages/my/index",
     "pages/draw/index",
     "pages/shop/index",
     "pages/fav/dish",
     "pages/location/index",
-    "pages/functionTest/index"
+    "pages/functionTest/index",
+    "pages/swiper/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -16,5 +17,12 @@
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
   },
-  "cloud": true
+  "permission": {
+    "scope.userInfo": "您的用户信息",
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于给您推荐更精准的菜品"
+    }
+  },
+  "cloud": true,
+  "sitemapLocation": "sitemap.json"
 }
