@@ -1,0 +1,8 @@
+
+<view class="module_head">
+  <view class="module_head_content">
+    <text class="module_head_title">店铺收藏</text>
+    <view class="module_head_desc">主人，您喜欢的店铺都在这里~</view>
+  </view>
+</view>
+<shopList shopListData="{{myFavShopList}}"/>

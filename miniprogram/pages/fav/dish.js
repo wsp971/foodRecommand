@@ -1,18 +1,37 @@
 // pages/fav/dish.js
+
+import Requst from '../../utils/request';
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    
+    foodList:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.getMyFavFoodList();
+  },
+
+
+  /**获取我喜欢菜品列表 */
+  async getMyFavFoodList(){
+    const result = await Requst({
+      url:'/miniProgram/myFavDish',
+      type:'GET',
+    });
+    if(result.data.code === 0){
+      const dishes = result.data.data;
+      this.setData({
+        foodList:dishes
+      })
+    }
+    console.log('result',result);
   },
 
   /**

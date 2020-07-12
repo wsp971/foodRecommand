@@ -1,0 +1,1 @@
+ <i-tag  class="i-tags food-item-tags" color="{{tag.color}}" >{{tag.name}}</i-tag>

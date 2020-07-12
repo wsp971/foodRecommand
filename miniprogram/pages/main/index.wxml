@@ -1,30 +1,7 @@
 
 
 <view class='main-container'>
-  <view class="location"><text>广东省深圳市</text></view>
-  <!-- <image class='main-pic' src='https://i.loli.net/2017/08/21/599a521472424.jpg'></image> -->
-  <!-- <view>
-    <image class='main-pic' src='http://wq.360buyimg.com/data/ppms/picture/WechatIMG105.jpeg'></image>
-    <view class='text-wrap'>
-      <view class='main-title'>精品兰州牛肉面</view>
-      <view class='main-desc'>兰州牛肉面，具有牛肉烂软，萝卜白净，辣油红艳，香菜翠绿，面条柔韧、滑利爽口、汤汁、诸味和谐，香味扑鼻，诱人食欲等特点。面条的种类较多，有大宽、二宽、韭叶、一窝丝、“荞麦棱等，还有“二细”、“三细”、“细”、“毛细”等，食客可随爱好自行选择。当地人们描述它是一清、二白、三绿、四红、五黄，即：牛肉汤清如白水，几片白萝卜纯白，汤上漂着鲜绿的蒜苗，辣椒油红，面条光亮透黄。因此，兰州牛肉面的声誉一直延续。</view>
-    </view>
-  <view>
-    <i-tag   class="i-tags main-item-tags"    color="red">
-        热门
-    </i-tag>
-    <i-tag   class="i-tags main-item-tags"     color="green">
-        新品
-    </i-tag>
-    <i-tag   class="i-tags main-item-tags"     color="blue">
-        1000+喜欢
-    </i-tag>
-    <text class="distance">距离4.1km</text>
-  </view>
-  </view> -->
-
   <recommend-food></recommend-food>
-  
 </view>
 
 <view class="module_head">
@@ -40,21 +17,19 @@
 </block>
 
 <block wx:else>
+<shopList shopListData="{{recommendShop}}"></shopList>
 
-<view class="shop-list"> 
-    <view class="shop-item" wx:for="{{recommendShop}}" wx:key="index">
-        <image class="shop-item-avater" src='{{item.logo}}'>
-        </image>
-        <view class="shop-item-desc">
-           <view class='shop-item-title'>{{item.name}}</view>
-           <view class='shop-item-content'>{{item.phone}}</view>
-           <view>
-            <text class="distance">距离{{item.distance}}m</text>  
-           </view>
-        </view>
-    </view>
- </view>
 
+<view class="module_head">
+  <view class="module_head_content">
+    <text class="module_head_title">健康饮食</text>
+    <view class="module_head_desc">健身饮食达人看过来~</view>
+  </view>
+</view>
+<view class="healthy-module">
+  <runCharts chartData="{{weixinRunData}}"/>
+  <view class="health-des">您近一月日均运动{{averageStep}} 步，已为您定制菜品<text class="health-link" bindtap="goHealthRecommend"> 去看看>></text></view>
+</view>
 
 <view class="module_head">
   <view class="module_head_content">
@@ -63,36 +38,14 @@
   </view>
 </view>
 
-  <view class="shop-list"> 
-    <view class="shop-item" wx:for="{{recommendFoodList}}" wx:key="index">
-        <image class="shop-item-avater" src='{{item.pic}}'>
-        </image>
-        <view class="shop-item-desc">
-           <view class='shop-item-title'>{{item.name}}</view>
-           <view class='shop-item-content'>{{item.description}}</view>
-           <view class='shop-item-others'>
-              <text class='shop-item-price'>￥{{item.price}}</text>
-                <view class='shop-item-favdesc fav'>
-                   <i-icon type="like_fill" size="20" color='grey'/>{{item.favourite}}
-                </view>
-           </view>
-           <view>
-            <i-tag   class="i-tags shop-item-tags"   wx:for="{{item.tags}}"  wx:for-item="tag" color="{{tag.color}}" wx:key="index">
-                {{tag.name}}
-            </i-tag>
-            <text class="distance">距离{{item.distance}}</text>  
-           </view>
-        </view>
-    </view>
- </view>
-
-
-
+<foodList foodData="{{foodRecommend}}"></foodList>
 
 </block>
 
 
 <footer current="homepage"></footer>
+
+<view class="randomFoodRecommend" bindtap="goRandomRecommend">去随机吃~</view>
 
 
 

@@ -9,7 +9,9 @@
     "pages/fav/dish",
     "pages/location/index",
     "pages/functionTest/index",
-    "pages/swiper/index"
+    "pages/swiper/index",
+    "pages/favShop/index",
+    "pages/healthyFoods/healthyFoods"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -18,7 +20,6 @@
     "navigationBarTextStyle": "black"
   },
   "permission": {
-    "scope.userInfo": "您的用户信息",
     "scope.userLocation": {
       "desc": "你的位置信息将用于给您推荐更精准的菜品"
     }

@@ -1,20 +1,33 @@
-// pages/test.js
+// miniprogram/pages/favShop/index.js
+import Request from '../../utils/request'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    myFavShopList:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
+
   onLoad: function (options) {
-      
+    this.getMyFavShopList();
   },
 
+  async getMyFavShopList(){
+    const result  = await  Request({
+      url:'/miniProgram/myFavShop',
+      type:'get'
+    })
+    if(result.data.code ===0){
+      this.setData({
+        myFavShopList:result.data.data
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

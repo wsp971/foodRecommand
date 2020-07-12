@@ -16,7 +16,6 @@ Page({
     })
   },
   onLoad: function () {
-    debugger;
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -26,7 +25,6 @@ Page({
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
-        debugger;
         this.setData({
           userInfo: res.userInfo,
           hasUserInfo: true
@@ -36,7 +34,6 @@ Page({
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
         success: res => {
-          debugger;
           app.globalData.userInfo = res.userInfo
           this.setData({
             userInfo: res.userInfo,
@@ -54,25 +51,11 @@ Page({
     console.log(this.route);
   } ,
 
-  // onShow(){
-  //   wx.request({
-  //     url: 'https://aoshiman.com.cn/shopServer/shop/shopList?pageIndex=0&pageSize=5',
-  //     data:{
-  //         pageIndex:0,
-  //         pageSize: 5 
-  //     },
-  //     success:(res)=>{
-  //       // debugger;
-  //     },
-  //     error:(res)=>{
-  //         // debugger;
-  //     }
-  //   });
+
 
 
   // },
   getUserInfo: function(e) {
-    debugger;
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({

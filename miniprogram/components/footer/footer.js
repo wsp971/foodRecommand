@@ -26,6 +26,9 @@ Component({
    */
   methods: {
     handleChange({detail}) {
+      if(detail.key === this.data.current){
+        return;
+      }
       this.setData({
         current: detail.key
       });

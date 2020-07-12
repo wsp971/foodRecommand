@@ -1,0 +1,7 @@
+
+   var  parsePrice = function (price){
+      return parseFloat(price).toFixed(2);
+   }
+   module.exports = {
+     parsePrice:parsePrice
+   };

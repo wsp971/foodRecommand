@@ -1,0 +1,22 @@
+<view class="shop-list"> 
+    <view class="shop-item" wx:for="{{shopListData}}" wx:key="index">
+        <image class="shop-item-avater" src='{{item.logo}}'>
+        </image>
+        <view class="shop-item-desc">
+           <view class='shop-item-title'>
+              <text>{{item.name}} </text> 
+              <i-icon type="collection_fill" color="#f4a01f"  data-index="{{index}}" data-item="{{item}}" size="24" wx:if="{{item.isFav}}" bindtap="unFav"/>
+              <i-icon type="collection"  data-item="{{item}}"  data-index="{{index}}" size="24" wx:else  bindtap="fav"/>
+           </view>
+           <view class='shop-item-content'>
+           <view class="shop-item-phone"> 
+            <i-icon type="mobilephone" color="#3dd3ec" size="20"/>{{item.phone}}
+           </view>
+           <view>
+            <view class="distance">距离{{item.distanceDes}}</view>  
+            <view class="distance" wx:if="{{item.duration>0}}">步行约{{item.durationDes}}</view>  
+           </view>
+           </view>
+        </view>
+    </view>
+ </view>

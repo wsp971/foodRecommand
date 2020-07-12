@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "foodTag":"../foodTag/foodTag",
+    "i-icon": "../../dist/icon/index"
+  }
+}

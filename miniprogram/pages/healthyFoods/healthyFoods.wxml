@@ -1,0 +1,30 @@
+
+
+
+<view class="module-container">
+  <text class="title">您近一月运动步数走势图</text>
+  <runCharts chartData="{{weixinRunData}}"/>
+</view>
+
+
+<view class="module_head">
+  <view class="module_head_content">
+    <text class="module_head_title">健康饮食</text>
+    <view class="module_head_desc">您最近一个月平均每天走路{{averageStep}}步,属于{{userDesc}}</view>
+  </view>
+</view>
+
+<view class="freeorder_list">
+  <view class="item" wx:for="{{recommendFoods}}">
+    <image class='item_image' mode='scaleToFill' src='{{item.pics[0]}}'></image>
+    <view class='item_info'>
+        <view class='item_info_name'>{{item.name}}</view>
+        <text class='item_info_price'>￥{{item.price}}</text> 
+        <text class="heatcount">{{item.heatQuatity}}大卡</text>
+        <view class='item_info_stock'>已有{{item.favourites}}人喜欢</view>
+        <view>
+        <foodTag tagType="{{tag}}" wx:for="{{item.tags}}" wx:if="{{idx<2}}" wx:for-item="tag" wx:for-index="idx" wx:key="idx" ></foodTag>
+        </view>
+    </view>
+  </view>
+</view>

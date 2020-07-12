@@ -1,86 +1,22 @@
 
 <view class="module_head">
-      <view class="module_head_content">
-        <text class="module_head_title">收藏菜品</text>
-        <view class="module_head_desc">主人，收藏的菜品要记得吃哦~</view>
-      </view>
-    </view>
-<!-- 'http://aoshiman.com.cn/uploads/1535989827474.png',
-      'http://aoshiman.com.cn/uploads/1535989833663.png',
-      'http://aoshiman.com.cn/uploads/1535989843269.png',
-      'http://aoshiman.com.cn/uploads/1535989473216.jpg', -->
+  <view class="module_head_content">
+    <text class="module_head_title">喜欢菜品</text>
+    <view class="module_head_desc">主人，收藏的菜品要记得吃哦~</view>
+  </view>
+</view>
 <view class="freeorder_list">
-  <view class="item">
-    <image class='item_image' mode='scaleToFill' src='http://aoshiman.com.cn/uploads/1535987687352.jpg'></image>
+  <view class="item" wx:for="{{foodList}}">
+    <image class='item_image' mode='scaleToFill' src='{{item.pics[0]}}'></image>
     <view class='item_info'>
-        <view class='item_info_name'>兰州精品牛肉面</view>
-        <text class='item_info_price'>￥20.00</text>
-        <view class='item_info_stock'>已有392人喜欢</view>
+        <view class='item_info_name'>{{item.name}}</view>
+        <text class='item_info_price'>￥{{item.price}}</text>
+        <view class='item_info_stock'>已有{{item.favourites}}人喜欢</view>
         <view>
-        <i-tag   class="i-tags shop-item-tags"    color="red">
-                  火爆
-              </i-tag>
-              <i-tag   class="i-tags shop-item-tags"     color="yellow">
-                  满减
-              </i-tag>
-            
+        <foodTag tagType="{{tag}}" wx:for="{{item.tags}}" wx:if="{{idx<2}}" wx:for-item="tag" wx:for-index="idx" wx:key="idx" ></foodTag>
         </view>
     </view>
-    
   </view>
-   <view class="item">
-    <image class='item_image' mode='scaleToFill' src='http://aoshiman.com.cn/uploads/1535987930790.jpg'></image>
-    <view class='item_info'>
-        <view class='item_info_name'>炒面 </view>
-        <text class='item_info_price'>￥8.00</text>
-        <view class='item_info_stock'>已有800人喜欢</view>
-        <view>
-        <i-tag   class="i-tags shop-item-tags"    color="green">
-                  新品
-              </i-tag>
-              <i-tag   class="i-tags shop-item-tags"     color="red">
-                  狠优惠
-              </i-tag>
-             
-        </view>
-    </view>
-    
-  </view>
-
-   <view class="item">
-    <image class='item_image' mode='scaleToFill' src='http://aoshiman.com.cn/uploads/1535988073204.jpg'></image>
-    <view class='item_info'>
-        <view class='item_info_name'>行面</view>
-        <text class='item_info_price'>￥25.00</text>
-        <view class='item_info_stock'>已有484人喜欢</view>
-        <view>
-        <i-tag   class="i-tags shop-item-tags"    color="green">
-                  热门
-              </i-tag>
-        </view>
-    </view>
-    
-  </view>
-
-   <view class="item">
-    <image class='item_image' mode='scaleToFill' src='http://aoshiman.com.cn/uploads/1535988183032.jpg'></image>
-    <view class='item_info'>
-        <view class='item_info_name'>凉面 </view>
-        <text class='item_info_price'>￥10.00</text>
-        <view class='item_info_stock'>已有298人喜欢</view>
-        <view>
-        <i-tag   class="i-tags shop-item-tags"    color="green">
-                  有优惠
-          </i-tag>
-              <i-tag   class="i-tags shop-item-tags"     color="yellow">
-                  有红包
-              </i-tag>
-        </view>
-    </view>
-    
-  </view>
-
-       
 </view>
 
 

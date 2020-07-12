@@ -10,7 +10,8 @@
     "i-card": "../../dist/card/index",
     "i-icon": "../../dist/icon/index",
     "i-tag": "../../dist/tag/index",
-    "footer":"/components/footer/footer"
+    "footer":"/components/footer/footer",
+    "foodList":"/components/foodList/foodList"
   },
   "navigationBarTitleText": "我的"
 }

@@ -11,7 +11,10 @@
     "i-icon": "../../dist/icon/index",
     "i-tag": "../../dist/tag/index",
     "recommend-food":"/components/recommendFood/index",
-    "footer":"/components/footer/footer"
+    "foodList":"/components/foodList/foodList",
+    "footer":"/components/footer/footer",
+    "shopList": "/components/shopList/index",
+    "runCharts":"/components/runCharts/index"
   },
-  "navigationBarTitleText": "武威市"
+  "navigationBarTitleText": "正在查询您所在的城市"
 }

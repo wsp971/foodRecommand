@@ -1,0 +1,31 @@
+
+
+<wxs module = "util" src="./utils.wxs"></wxs>
+
+<view class="food-list"> 
+    <view class="food-item" wx:for="{{foodData}}">
+        <image class="food-item-avater" src='{{item.pics[0]}}'>
+        </image>
+        <view class="food-item-desc">
+           <view class='food-item-title'>{{item.name}}</view>
+           <view class='food-item-content'>{{item.description}}</view>
+           <view class='food-item-others'>
+              <text class='food-item-price'>￥{{util.parsePrice(item.price)}}</text>
+              <text class="food-item-price-del" wx:if="{{item.prePrice}}">￥{{util.parsePrice(item.prePrice)}}</text>
+
+               <view class='food-item-favdesc fav' wx:if="{{item.isFav}}" bindtap="dislike" data-item="{{item}}" data-idx="{{index}}">
+                  <i-icon type="like_fill" size="20" color='red'/>{{item.favourites}}
+               </view>
+
+               <view class='food-item-favdesc' wx:else  data-item="{{item}}" data-idx="{{index}}" bindtap="like">
+                  <i-icon type="like" size="20"  color="grey"/>{{item.favourites}}
+               </view>
+
+           </view>
+           <view>
+             <foodTag tagType="{{tag}}" wx:for="{{item.tags}}" wx:for-item="tag" wx:for-index="idx" wx:key="idx" >
+             </foodTag>
+           </view>
+        </view>
+    </view>
+  </view>

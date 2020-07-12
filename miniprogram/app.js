@@ -1,8 +1,8 @@
-import authorize from './utils/authorize.js'
+// import  UserInfo from './utils/UserInfo.js'
+// import Request from './utils/request';
 
 App({
   onLaunch: function () {
-    authorize();
   },
   globalData: {
     userInfo: null,

@@ -5,10 +5,7 @@ const cookies = wx.getStorageSync('cookies') || {};
 function addItem(key,value){
     console.log(key,value);
     Object.assign(cookies,{[key]:value});
-    wx.setStorage({
-      key: 'cookies',
-      data: cookies,
-    });
+    wx.setStorageSync('cookies'.cookies);
 }
 
 function getItem(key){

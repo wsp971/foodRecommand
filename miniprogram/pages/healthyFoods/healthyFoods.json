@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "runCharts":"/components/runCharts/index"
+  },
+  "navigationBarTitleText": "健康推荐"
+}

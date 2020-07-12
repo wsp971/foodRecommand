@@ -1,3 +1,7 @@
+
+import Request from '../../utils/request'
+
+
 Page({
   data: {
     circleList: [],//圆点数组
@@ -8,14 +12,7 @@ Page({
     colorAwardSelect: '#ffe400',//奖品选中颜色
     indexSelect: 0,//被选中的奖品index
     isRunning: false,//是否正在抽奖
-    imageAward: [
-      'http://aoshiman.com.cn/uploads/1535989827474.png',
-      'http://aoshiman.com.cn/uploads/1535989833663.png',
-      'http://aoshiman.com.cn/uploads/1535989843269.png',
-      'http://aoshiman.com.cn/uploads/1535989473216.jpg',
-      'http://aoshiman.com.cn/uploads/1535988183032.jpg',
-      'http://aoshiman.com.cn/uploads/1535987930790.jpg',
-    ],//奖品图片数组
+    randomFoods:[]
   },
 
   onLoad: function () {
@@ -95,11 +92,46 @@ Page({
         leftAward = leftAward;
         topAward = topAward - 150 - 15;
       }
-      var imageAward = this.data.imageAward[j];
-      awardList.push({ topAward: topAward, leftAward: leftAward, imageAward: imageAward });
+      // var imageAward = this.data.imageAward[j];
+      awardList.push({ topAward: topAward, leftAward: leftAward });
     }
     this.setData({
       awardList: awardList
+    })
+  },
+
+  onReady: function(){
+    this.getRandomFood();
+  },
+
+  async getRandomFood(){
+    const data = await Request({
+      url:'/miniProgram/suggestFood',
+      type:'GET'
+    });
+    console.log('data',data);
+
+    if(data.data.code===0){
+      this.setData({
+        randomFoods: data.data.data.slice(0,9),
+        changeIndex:0,
+        allFoods: data.data.data
+      })
+    }
+  },
+  change(){
+    const index = this.data.changeIndex + 1;
+    const foods = this.data.allFoods.slice(index* 9,(index+1)* 9);
+    if(foods.length<9){
+      wx.showToast({
+        title: '没有更多啦~~~',
+        icon:'none'
+      })
+      return;
+    }
+    this.setData({
+      changeIndex:index,
+      randomFoods: foods
     })
   },
   //开始游戏
@@ -114,30 +146,29 @@ Page({
     var timer = setInterval(function () {
       indexSelect++;
       //这里我只是简单粗暴用y=30*x+200函数做的处理.可根据自己的需求改变转盘速度
-      i += 30;
-      if (i > 1000) {
-        //去除循环
-        clearInterval(timer)
-        //获奖提示
+      i += parseInt(Math.random() * 30);
 
-        wx.showModal({
-          title: '恭喜你',
-          content: '抽中了精品兰州牛肉拉面',
-          confirmText:"去吃",
-          showCancel: false,//去掉取消按钮
-          success: function (res) {
-            if (res.confirm) {
-              _this.setData({
-                isRunning: false
-              })
-            }
-          }
-        })
-      }
       indexSelect = indexSelect % 8;
       _this.setData({
         indexSelect: indexSelect
       })
-    }, (200 + i))
+      if (i > 1000) {
+        //去除循环
+        clearInterval(timer)
+        //获奖提示
+        wx.showModal({
+          title: '恭喜你',
+          content: `今天你的胃想吃${_this.data.randomFoods[indexSelect].name}啦~`,
+          confirmText:"去吃",
+          showCancel: false,//去掉取消按钮
+          success: function (res) {
+            if (res.confirm) f
+              _this.setData({
+                isRunning: false
+              })
+            }
+          })
+      }
+    }, 200 )
   }
 })

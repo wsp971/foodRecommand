@@ -1,4 +1,8 @@
-// pages/test/index.js
+
+import Request from '../../utils/request'
+import UserInfo from '../../utils/userInfo'
+
+
 Page({
 
   /**
@@ -13,23 +17,60 @@ Page({
     
   },
 
+  data:{
+    userInfo:null,
+    foodRecommend:[],
+  },
+
   userinfo(userInfo){
-    console.log('userinfo',userInfo);
+    console.log('userinfo',userInfo.detail.userInfo);
+    Request({
+      url:'/miniProgram/syncUserInfo',
+      type:'GET',
+      data:{
+        ...userInfo.detail.userInfo,
+      }
+    }).catch(e=>{
+      wx.showToast({
+        title: e.message,
+      })
+    })
 
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    this.getRecommendFoods();
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    UserInfo.getUserInfo().then((user)=>{
+      console.log('userInfo',user)
+      this.setData({
+        userInfo: user
+      })
+    })
+    
   },
+
+
+   // 获取随机推荐菜品
+   getRecommendFoods(){
+    Request({
+      url:'/miniProgram/suggestFood',
+      type:'GET',
+    }).then(res=>{
+      let foods = res.data.data;
+      this.setData({
+        foodRecommend:foods,
+      })
+    })
+  },
+
 
   /**
    * 生命周期函数--监听页面隐藏

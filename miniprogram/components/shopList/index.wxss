@@ -1,0 +1,81 @@
+.shop-list{
+  background: #fff;
+  width: 100%;
+  padding: 5px;
+  margin-top: 5px;
+}
+.shop-item{
+  height: 180rpx;
+  border-bottom: 1px solid #f1f1f1;
+  display:flex;
+  flex-wrap: nowrap;
+  justify-items: space-between;
+}
+.shop-item:last-child{
+ border-bottom:none;
+}
+
+.shop-item-avater{
+  width: 160rpx;
+  height: 120rpx;
+}
+
+.shop-item-desc{
+  flex:1;
+  max-width: 560rpx;
+  padding: 0 5px;
+}
+
+.shop-item-title{
+font-size:18px;
+font-weight: bold;
+overflow:hidden;
+text-overflow: ellipsis;
+white-space:nowrap;
+color: #1c2438;
+display:flex;
+padding-right:5px;
+justify-content: space-between;
+}
+
+.shop-item-phone{
+font-size: 14px;
+color: #ccc;
+}
+.shop-item-content{
+display:flex;
+font-size:12px;
+flex-wrap: nowrap;
+color: #495060;
+justify-content: space-between;
+}
+
+.shop-item-others{
+font-size: 14px;
+position: relative;
+}
+
+.shop-item-price{
+color:#ed3f14;
+}
+
+.shop-item-favdesc{
+position:absolute;
+right: 10px;
+top:0;
+}
+
+.shop-item-favdesc.fav{
+color:red;
+}
+
+.shop-item-tags{
+ margin: 0 5px;
+}
+
+.distance{
+ margin:5px;
+ color:#ccc;
+ font-size: 12px;
+ border-radius: 5px;
+}

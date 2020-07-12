@@ -52,16 +52,18 @@ Component({
 
       this.setData({
         cards: cards,
-        current_cursor: cards.findIndex(item => item),
+        // current_cursor: cards.findIndex(item => item),
         removed_cards: []
       })
     },
-
-
     // 获取随机推荐菜品
     getRecommendFoods(){
       Request({
         url:'/miniProgram/suggestFood',
+        data:{
+        // 需要过滤自己已经喜欢的菜品
+          needFilter:1
+        },
         type:'GET',
       }).then(res=>{
         let foods = res.data.data;
@@ -69,23 +71,34 @@ Component({
         console.log('foods',foods);
         this.setData({
           recommendFoods:foods,
-          current_cursor: foods.findIndex(item => item),
+          // current_cursor: foods.findIndex(item => item),
           removed_cards: []
         })
       })
     },
 
-    cardSwipe(e) {
+    async cardSwipe(e) {
       const { direction, swiped_card_index, current_cursor } = e.detail
       console.log(e.detail)
-      wx.showToast({
-        title: `卡片${swiped_card_index + 1}向${direction === 'left' ? '左' : '右'}滑`,
-        icon: 'none',
-        duration: 1000
-      })
-      this.setData({
-        current_cursor
-      })
+      const msg = `您${direction==='left'? '不喜欢':'喜欢'} ${this.data.recommendFoods[swiped_card_index].name}`
+      const likeOrNot = direction !== 'left';
+      const url = likeOrNot ? '/miniprogram/favFood': '/miniprogram/addDisLikeFood';
+      // if(likeOrNot){
+        const result = await Request({
+          url:url,
+          data:{
+            id: this.data.recommendFoods[swiped_card_index]._id,
+            type:1
+          }
+        })
+        if(result.data.code ==0){
+          wx.showToast({
+            title: msg,
+            icon: 'none',
+            duration: 1000
+          })
+        }
+      // }
     },
   }
 })

@@ -19,7 +19,9 @@
 			"disablePlugins": [],
 			"outputPath": ""
 		},
-		"useCompilerModule": true,
+		"bundle": true,
+		"useIsolateContext": true,
+		"useCompilerModule": false,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"appid": "wx96f6c5f5dcbac389",
@@ -98,6 +100,26 @@
 					"name": "swiper",
 					"pathName": "pages/swiper/index",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的",
+					"pathName": "pages/my/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "test",
+					"pathName": "pages/logs/logs",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "微信运动",
+					"pathName": "pages/healthyFoods/healthyFoods",
 					"scene": null
 				}
 			]

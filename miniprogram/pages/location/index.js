@@ -1,5 +1,5 @@
 // pages/location/index.js
-const QQMapWX = require('../../lib/qqmap-wx-jssdk.min.js');
+const QQMapWX = require('../../lib/qqmap-wx-jssdk.js');
 const instance = new QQMapWX({
   key:'DC5BZ-ULGKI-NV4GK-5FX4Y-CDQKS-TRB7W'
 });
@@ -25,7 +25,6 @@ Page({
           success: function(res) {
             console.log(res);
             const { latitude, longitude} = res;
-            debugger;
             wx.openLocation({
               latitude,
               longitude,
@@ -46,7 +45,6 @@ Page({
       }
     });
 
-    // debugger;
   },
 
   /**
